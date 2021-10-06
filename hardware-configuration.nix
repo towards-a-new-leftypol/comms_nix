@@ -21,6 +21,16 @@
       fsType = "ext4";
     };
 
+  fileSystems."/mnt/hdd" =
+    { device = "/dev/sdb";
+      fsType = "btrfs";
+    };
+
+  fileSystems."/var/lib/matrix-synapse/media" =
+    { device = "/mnt/hdd/content/matrix-synapse/media";
+      options = [ "bind" ];
+    };
+
   swapDevices = [ ];
 
 }

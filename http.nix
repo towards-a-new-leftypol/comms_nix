@@ -71,7 +71,7 @@ in
 
     virtualHosts."talk.leftychan.net" = {
       enableACME = true;
-      addSSL = true;
+      forceSSL = true;
 
       root = "${pkgs.element-web}";
 
@@ -90,6 +90,7 @@ in
 
       listen = [
         { addr = "0.0.0.0"; port = 443; ssl = true; }
+        { addr = "0.0.0.0"; port = 80; ssl = false; }
       ];
     };
 

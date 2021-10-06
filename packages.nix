@@ -15,5 +15,6 @@
     lshw
     python3
     lsof
+    btrfs-progs
   ];
 }
