@@ -10,7 +10,7 @@ let
   tls_certificate = "${acme_dir}/netdata-l.leftychan.net/fullchain.pem";
   tls_private_key = "${acme_dir}/netdata-l.leftychan.net/key.pem";
 
-  external_ip = "addr:198.204.240.194";
+  external_ip = "198.204.240.194";
 
   recaptcha_pk = builtins.readFile ./secrets/recaptcha_private_key;
   db_password = builtins.readFile ./secrets/database-password;
