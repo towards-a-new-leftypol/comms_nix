@@ -13,6 +13,8 @@
       ./packages.nix
       ./netdata.nix
       ./http.nix
+      ./postgresql.nix
+      ./matrix.nix
     ];
 
   # Use the GRUB 2 boot loader.

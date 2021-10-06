@@ -14,5 +14,6 @@
     ethtool
     lshw
     python3
+    lsof
   ];
 }
