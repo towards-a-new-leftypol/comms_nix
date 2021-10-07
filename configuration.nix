@@ -15,6 +15,7 @@
       ./http.nix
       ./postgresql.nix
       ./matrix.nix
+      ./mail.nix
     ];
 
   # Use the GRUB 2 boot loader.

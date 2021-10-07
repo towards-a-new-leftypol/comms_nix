@@ -132,7 +132,7 @@ in
               SYSLOG_IDENTIFIER: synapse
 
       root:
-          level: DEBUG
+          level: WARNING
           handlers: [journal]
 
       disable_existing_loggers: False
