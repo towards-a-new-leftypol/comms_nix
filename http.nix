@@ -59,6 +59,10 @@ in
       addSSL = true;
 
       locations = {
+        "= /" = {
+          return = "$scheme://talk.leftychan.net$request_uri";
+        };
+
         "/" = {
           proxyPass = "http://127.0.0.1:8030";
         };
@@ -66,6 +70,7 @@ in
 
       listen = [
         { addr = "0.0.0.0"; port = 443; ssl = true; }
+        { addr = "0.0.0.0"; port = 80; ssl = false; }
       ];
     };
 
