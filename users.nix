@@ -31,10 +31,9 @@
   users.extraUsers.zero = {
     isNormalUser = true;
     home = "/home/admin";
-    description = "Sysadmin account. SSH into this.";
+    description = "zeros account - mainly for email";
     extraGroups = [ "wheel" ];
 
-    # the password is password
     hashedPassword = "$6$tpMnAm2wM$jOtRv91BXmdfjcotiIF6F/v931HsuC2qablEY/1GaKeT4EJBKiTKsBKm4FL4KFYVbhvvz5J6FB44Q.BqiQ6iR1";
     openssh.authorizedKeys.keys = [
         # Zer0's key, add your public key here
