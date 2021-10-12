@@ -17,5 +17,7 @@
           work_mem = "16MB";
         };
     };
+
+    services.postgresqlBackup.enable = true;
 }
 
