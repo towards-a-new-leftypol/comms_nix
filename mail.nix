@@ -32,7 +32,7 @@ in
             aliases = ["0@leftychan.net"];
         };
         "comatoast@leftychan.net" = {
-            hashedPassword = "$2y$05$cTk.wYb2GS1zYak2JHzho.hZB8XYYp8trQdwQNFWMC7YEdGRyVsGO";
+            hashedPassword = "$2y$05$Hfa0MTgivLek/iEWaUlReunpkY3g6As87Oqo516aJZuUCGzbAnZty";
         };
     };
 
@@ -48,7 +48,13 @@ in
     comatoast = {
       isSystemUser = true;
       description = "comatoast's account - for email only";
-      hashedPassword = "$2y$05$cTk.wYb2GS1zYak2JHzho.hZB8XYYp8trQdwQNFWMC7YEdGRyVsGO";
+      hashedPassword = "$2y$05$Hfa0MTgivLek/iEWaUlReunpkY3g6As87Oqo516aJZuUCGzbAnZty";
+    };
+
+    zero = {
+      isSystemUser = true;
+      description = "zeros account - mainly for email";
+      hashedPassword = "$6$tpMnAm2wM$jOtRv91BXmdfjcotiIF6F/v931HsuC2qablEY/1GaKeT4EJBKiTKsBKm4FL4KFYVbhvvz5J6FB44Q.BqiQ6iR1";
     };
   };
 

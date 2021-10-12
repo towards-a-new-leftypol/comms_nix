@@ -69,7 +69,7 @@ in
       {
         port = 8030;
         tls = false;
-        #x_forwarded = true;
+        x_forwarded = true;
         resources = [
           { names = ["client"]; compress = true; }
         ];
