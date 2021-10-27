@@ -19,5 +19,13 @@
     };
 
     services.postgresqlBackup.enable = true;
+    users.extraUsers.postgres = {
+      isSystemUser = true;
+
+      openssh.authorizedKeys.keys = [
+          # for backups
+          "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBu2RKq+iiu2DoaeMlwhzGGGJww0qP1miyvBJ8OoDc8145XY9kw/LFQ8FbDG8jezszfpe6T6zEbpLFgEoj/ClrA= zer0@localhost"
+      ];
+    };
 }
 

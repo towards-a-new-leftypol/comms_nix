@@ -139,9 +139,17 @@ in
     '';
   };
 
-  users.extraUsers.matrix-synapse.extraGroups = [ "nginx" ];
-  users.extraUsers.matrix-synapse.isSystemUser = true;
   users.extraUsers.turnserver.extraGroups = [ "nginx" ];
   users.extraUsers.turnserver.isSystemUser = true;
+
+  users.extraUsers.matrix-synapse = {
+    isSystemUser = true;
+    extraGroups = [ "nginx" ];
+
+    openssh.authorizedKeys.keys = [
+        # for backups
+        "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBu2RKq+iiu2DoaeMlwhzGGGJww0qP1miyvBJ8OoDc8145XY9kw/LFQ8FbDG8jezszfpe6T6zEbpLFgEoj/ClrA= zer0@localhost"
+    ];
+  };
 }
 
