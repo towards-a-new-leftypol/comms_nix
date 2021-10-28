@@ -1,4 +1,4 @@
-# Note that the hashedPassword given in the emails should match the same field
+# TODO: Note that the hashedPassword given in the emails should match the same field
 # in the users. Maybe down the line define a single list of sets to build
 # both from, and not repeat things.
 
@@ -34,6 +34,10 @@ in
         "comatoast@leftychan.net" = {
             hashedPassword = "$2y$05$Hfa0MTgivLek/iEWaUlReunpkY3g6As87Oqo516aJZuUCGzbAnZty";
         };
+        #pine
+        "rockstar@leftychan.net" = {
+            hashedPassword = "$2y$05$UpONRXLVqXdgT47HeUcaaee1fyNd/4Zo/ogezmhNLVudgqkMGbd3.";
+        };
     };
 
     # Use Let's Encrypt certificates. Note that this needs to set up a stripped
@@ -55,6 +59,12 @@ in
       isSystemUser = true;
       description = "zeros account - mainly for email";
       hashedPassword = "$6$tpMnAm2wM$jOtRv91BXmdfjcotiIF6F/v931HsuC2qablEY/1GaKeT4EJBKiTKsBKm4FL4KFYVbhvvz5J6FB44Q.BqiQ6iR1";
+    };
+
+    rockstar = {
+      isSystemUser = true;
+      description = "pine's account - for email only";
+      hashedPassword = "$2y$05$UpONRXLVqXdgT47HeUcaaee1fyNd/4Zo/ogezmhNLVudgqkMGbd3.";
     };
   };
 
