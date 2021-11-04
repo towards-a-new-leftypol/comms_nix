@@ -6,6 +6,7 @@ let
   riot_config = {
     default_hs_url = "https://matrix.leftychan.net";
     default_is_url = "https://matrix.org";
+    showLabsSettings = true;
   };
 
   riot_config_file = pkgs.writeText "config.json" (builtins.toJSON riot_config);
