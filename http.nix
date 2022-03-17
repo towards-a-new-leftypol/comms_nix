@@ -31,7 +31,6 @@ in
       postRun = "systemctl reload nginx"
         + lib.optionalString config.services.matrix-synapse.enable " matrix-synapse; "
         + lib.optionalString config.services.coturn.enable " systemctl restart coturn";
-
     };
   };
 
@@ -54,6 +53,11 @@ in
         { addr = "0.0.0.0"; port = 443; ssl = true; }
         { addr = "0.0.0.0"; port = 80; ssl = false; }
       ];
+    };
+
+    virtualHosts."mumble.leftychan.net" = {
+      enableACME = true;
+      addSSL = true;
     };
 
     virtualHosts."matrix.leftychan.net" = {

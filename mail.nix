@@ -46,6 +46,10 @@ in
   };
 
 
+  users.groups = {
+    email_only = {};
+  };
+
   # Since email user authentication requires a user account on the system, make
   # accounts for everyone for the system to use
   users.extraUsers = {
