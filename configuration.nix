@@ -17,6 +17,7 @@
       ./matrix.nix
       ./mail.nix
       ./mumble.nix
+      ./gitea.nix
     ];
 
   # Use the GRUB 2 boot loader.

@@ -26,6 +26,7 @@ in
       extraDomainNames = [
         "talk.leftychan.net"
         "matrix.leftychan.net"
+        "git.leftychan.net"
       ];
 
       postRun = "systemctl reload nginx"
@@ -98,6 +99,22 @@ in
       extraConfig = ''
           client_max_body_size 10000M; 
       '';
+
+      listen = [
+        { addr = "0.0.0.0"; port = 443; ssl = true; }
+        { addr = "0.0.0.0"; port = 80; ssl = false; }
+      ];
+    };
+
+    virtualHosts."git.leftychan.net" = {
+      enableACME = true;
+      addSSL = true;
+
+      locations = {
+        "/" = {
+          proxyPass = "http://127.0.0.1:3000";
+        };
+      };
 
       listen = [
         { addr = "0.0.0.0"; port = 443; ssl = true; }

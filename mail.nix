@@ -38,6 +38,10 @@ in
         "rockstar@leftychan.net" = {
             hashedPassword = "$2y$05$UpONRXLVqXdgT47HeUcaaee1fyNd/4Zo/ogezmhNLVudgqkMGbd3.";
         };
+        #gitea
+        "git@leftychan.net" = {
+            hashedPassword = "$2y$05$tPqgBWGg6GzcSzFSFxCLM.GwruYrOT3G6UzAzhR6OF/P0/7XdWXMG";
+        };
     };
 
     # Use Let's Encrypt certificates. Note that this needs to set up a stripped
@@ -71,6 +75,13 @@ in
       isSystemUser = true;
       description = "pine's account - for email only";
       hashedPassword = "$2y$05$UpONRXLVqXdgT47HeUcaaee1fyNd/4Zo/ogezmhNLVudgqkMGbd3.";
+      group = "email_only";
+    };
+
+    git = {
+      isSystemUser = true;
+      description = "git[ea] account";
+      hashedPassword = "$2y$05$tPqgBWGg6GzcSzFSFxCLM.GwruYrOT3G6UzAzhR6OF/P0/7XdWXMG";
       group = "email_only";
     };
   };
