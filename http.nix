@@ -18,7 +18,7 @@ in
   ];
 
   security.acme = {
-    email = "paul_cockshott@protonmail.com";
+    defaults.email = "paul_cockshott@protonmail.com";
     acceptTerms = true;
     certs."${subdomain}" = {
       group = "nginx";
@@ -39,6 +39,8 @@ in
     enable = true;
     recommendedTlsSettings = true;
     recommendedProxySettings = true;
+    recommendedOptimisation = true;
+    recommendedGzipSettings = true;
 
     virtualHosts."${subdomain}" = {
       enableACME = true;
@@ -63,21 +65,20 @@ in
 
     virtualHosts."matrix.leftychan.net" = {
       enableACME = true;
-      addSSL = true;
+      forceSSL = true;
 
-      locations = {
-        "= /" = {
-          return = "$scheme://talk.leftychan.net$request_uri";
-        };
+      locations."/".extraConfig = '' 
 
-        "/" = {
-          proxyPass = "http://127.0.0.1:8030";
-        };
-      };
+
+        return 404;
+      '';
+
+      locations."/_matrix".proxyPass = "http://[::1]:8030"; 
+      locations."/_synapse/client".proxyPass = "http://[::1]:8030"; 
 
       listen = [
+        { addr = "0.0.0.0"; port = 8448; ssl = true; }
         { addr = "0.0.0.0"; port = 443; ssl = true; }
-        { addr = "0.0.0.0"; port = 80; ssl = false; }
       ];
     };
 

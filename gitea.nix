@@ -17,8 +17,9 @@
     };
     dump = {
       enable = true;
-      interval = "hourly";
       backupDir = "/var/backup/gitea";
+      type = "tar.gz";
+      file = "gitea-dump";
     };
   };
 

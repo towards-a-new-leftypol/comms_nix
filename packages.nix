@@ -9,8 +9,8 @@
     ripgrep
     xz
     screen
-    telnet
-    ncat
+    inetutils
+    nmap
     ethtool
     lshw
     python3
