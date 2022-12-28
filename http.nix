@@ -10,6 +10,17 @@ let
   };
 
   riot_config_file = pkgs.writeText "config.json" (builtins.toJSON riot_config);
+
+  clientConfig = {
+    "m.homeserver".base_url = "https://matrix.leftychan.net";
+    "m.identity_server" = {};
+  };
+  serverConfig."m.server" = "matrix.leftychan.net";
+  mkWellKnown = data: ''
+    add_header Content-Type application/json;
+    add_header Access-Control-Allow-Origin *;
+    return 200 '${builtins.toJSON data}';
+  '';
 in
 
 {
@@ -66,6 +77,9 @@ in
     virtualHosts."matrix.leftychan.net" = {
       enableACME = true;
       forceSSL = true;
+
+      locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
+      locations."= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
 
       locations."/".extraConfig = '' 
 
