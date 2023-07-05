@@ -3,7 +3,6 @@
 {
   services.gitea = {
     enable = true;
-    domain = "git.leftychan.net";
     settings = {
       mailer = {
         ENABLED = true;
@@ -13,6 +12,9 @@
         IS_TLS_ENABLED = true;
         USER = "git@leftychan.net";
         PASSWD = builtins.readFile ./secrets/git_mail_password;
+      };
+      server = {
+        DOMAIN = "git.leftychan.net";
       };
     };
     dump = {

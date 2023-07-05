@@ -72,6 +72,11 @@ in
     virtualHosts."mumble.leftychan.net" = {
       enableACME = true;
       addSSL = true;
+
+      listen = [
+        { addr = "0.0.0.0"; port = 443; ssl = true; }
+        { addr = "0.0.0.0"; port = 80; ssl = false; }
+      ];
     };
 
     virtualHosts."matrix.leftychan.net" = {

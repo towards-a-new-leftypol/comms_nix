@@ -22,7 +22,6 @@
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
   # Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.configurationLimit = 10;
@@ -65,8 +64,8 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  services.openssh.passwordAuthentication = false;
-  services.openssh.permitRootLogin = "no";
+  services.openssh.settings.PasswordAuthentication = false;
+  services.openssh.settings.PermitRootLogin = "no";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
