@@ -34,11 +34,14 @@
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
-  networking.useDHCP = false;
+  # networking.useDHCP = false;
 
   networking = {
-    defaultGateway = "198.204.240.193";
-    # Use google's public DNS server for now
+    defaultGateway = {
+      address = "198.204.240.193";
+      interface = "eth1";
+    };
+    # Use google's public DNS server
     nameservers = [ "8.8.8.8" ];
     interfaces.eth0.useDHCP = false;
     interfaces.eth1 = {
