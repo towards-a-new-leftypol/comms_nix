@@ -11,13 +11,13 @@
       ./users.nix
       ./networking.nix
       ./packages.nix
-      ./netdata.nix
-      ./http.nix
-      ./postgresql.nix
-      ./matrix.nix
-      ./mail.nix
-      ./mumble.nix
-      ./gitea.nix
+      #./netdata.nix
+      #./http.nix
+      #./postgresql.nix
+      #./matrix.nix
+      #./mail.nix
+      #./mumble.nix
+      #./gitea.nix
     ];
 
   # Use the GRUB 2 boot loader.
