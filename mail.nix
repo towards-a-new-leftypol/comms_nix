@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 
 let
-  release = "nixos-22.05";
+  release = "nixos-23.05";
 
 in
 

@@ -8,29 +8,39 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.kernelParams = [
-    "net.ifnames=0" #Make it use predictable interface names starting with eth0
-  ];
   boot.initrd.availableKernelModules = [ "ahci" "ohci_pci" "ehci_pci" "pata_atiixp" "floppy" "sd_mod" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/951cec3a-0d69-483b-93bb-7dbca0a1379d";
+    { device = "/dev/disk/by-uuid/4f63ac8d-7379-46f8-a945-5861e31b4f94";
       fsType = "ext4";
     };
 
   fileSystems."/mnt/hdd" =
-    { device = "/dev/sdb";
+    { device = "/dev/disk/by-uuid/6632972d-0120-47c9-9784-7aba2b0643b5";
       fsType = "btrfs";
     };
 
-  fileSystems."/var/lib/matrix-synapse/media" =
-    { device = "/mnt/hdd/content/matrix-synapse/media";
+  fileSystems."/var/lib/matrix-synapse/media_store" =
+    { device = "/mnt/hdd/content/matrix-synapse/media_store";
       options = [ "bind" ];
     };
 
-  swapDevices = [ ];
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/e0e52ef0-8b69-447b-b87d-b3625ebdf11c"; }
+    ];
 
+  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+  # (the default) this is the recommended approach. When using systemd-networkd it's
+  # still possible to use this option, but it's recommended to use it in conjunction
+  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+  networking.useDHCP = lib.mkDefault true;
+  # networking.interfaces.eth0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.eth1.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wg0.useDHCP = lib.mkDefault true;
+
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
