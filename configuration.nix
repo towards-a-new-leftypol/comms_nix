@@ -11,6 +11,13 @@
       ./users.nix
       ./networking.nix
       ./packages.nix
+      ./gitea.nix
+      ./http.nix
+      ./mail.nix
+      ./matrix.nix
+      ./mumble.nix
+      ./netdata.nix
+      ./postgresql.nix
     ];
 
   # Use the GRUB 2 boot loader.
@@ -20,8 +27,9 @@
   # boot.loader.efi.efiSysMountPoint = "/boot/efi";
   # Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0"; # or "nodev" for efi only
+  boot.loader.grub.configurationLimit = 30;
 
-  # networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "PUSHKA2"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -107,4 +115,3 @@
   system.stateVersion = "23.05"; # Did you read the comment?
 
 }
-
