@@ -15,6 +15,7 @@
       };
       server = {
         DOMAIN = "git.leftychan.net";
+        ROOT_URL = "https://git.leftychan.net/";
       };
     };
     dump = {
