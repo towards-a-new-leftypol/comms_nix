@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   services.gitea = {
@@ -26,12 +26,40 @@
     };
   };
 
-  users.extraUsers.gitea = {
-    isSystemUser = true;
+  users.users.gitea-backup = lib.mkIf config.services.gitea.dump.enable {
+    isNormalUser = true;
+    group = "gitea";
+    createHome = false;
+    home = config.services.gitea.dump.backupDir;
 
     openssh.authorizedKeys.keys = [
         # for backups
         "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBu2RKq+iiu2DoaeMlwhzGGGJww0qP1miyvBJ8OoDc8145XY9kw/LFQ8FbDG8jezszfpe6T6zEbpLFgEoj/ClrA= zer0@localhost"
     ];
+  };
+
+  systemd.services.gitea-dump-perms-fix = let
+    gitea_config = config.services.gitea;
+  in
+
+  lib.mkIf gitea_config.dump.enable {
+    description = "gitea dump file permissions fix";
+
+    after = [ "gitea-dump.service" ];
+    requires = [ "gitea-dump.service" ];
+    partOf = [ "gitea-dump.service" ];
+    wantedBy = [ "gitea-dump.service" ];
+
+    environment = {
+      USER = "gitea";
+      HOME = "/var/backup/gitea";
+    };
+
+    serviceConfig = {
+      Type = "oneshot";
+      User = "gitea";
+      ExecStart = "${pkgs.coreutils}/bin/chmod 660 ${gitea_config.dump.backupDir}/${gitea_config.dump.file}.${gitea_config.dump.type}";
+      WorkingDirectory = gitea_config.dump.backupDir;
+    };
   };
 }
