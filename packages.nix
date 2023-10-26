@@ -16,6 +16,7 @@
     python3
     lsof
     btrfs-progs
+    matrix-synapse-tools.synadm
   ];
 }
 
