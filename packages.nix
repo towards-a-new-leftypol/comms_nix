@@ -17,6 +17,7 @@
     lsof
     btrfs-progs
     matrix-synapse-tools.synadm
+    dig
   ];
 }
 
