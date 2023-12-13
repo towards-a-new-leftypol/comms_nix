@@ -128,7 +128,7 @@ in
 
     virtualHosts."git.leftychan.net" = {
       enableACME = true;
-      addSSL = true;
+      forceSSL = true;
 
       locations = {
         "/" = {
