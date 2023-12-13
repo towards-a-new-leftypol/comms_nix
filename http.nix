@@ -3,6 +3,8 @@
 let
   subdomain = "netdata-l.leftychan.net";
 
+  onion = "leftychans5gstl4zee2ecopkv6qvzsrbikwxnejpylwcho2yvh4owad.onion";
+
   riot_config = {
     default_hs_url = "https://matrix.leftychan.net";
     default_is_url = "https://matrix.org";
@@ -135,6 +137,10 @@ in
           proxyPass = "http://127.0.0.1:3000";
         };
       };
+
+      extraConfig = ''
+        add_header Onion-Location http://git.${onion}$request_uri;
+      '';
 
       listen = [
         { addr = "0.0.0.0"; port = 443; ssl = true; }
