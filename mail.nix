@@ -32,7 +32,7 @@ in
             aliases = ["0@leftychan.net"];
         };
         "comatoast@leftychan.net" = {
-            hashedPassword = "$y$j9T$ejZUWDTuXhMdoxe8LfYWf0$Bo28FRSZnyzr0ngbba72HnkAWu3eez3gmbaGVf8W/nD";
+            hashedPassword = "$y$j9T$KcALsdRrqweFMDDn0XUV0/$njYkLv3WJtcCFFlLym9DkpRNs1ajHxHQZTg/62ZWN4/";
         };
         #pine
         "rockstar@leftychan.net" = {
