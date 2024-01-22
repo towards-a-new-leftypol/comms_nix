@@ -28,19 +28,19 @@ in
     # nix run nixpkgs.apacheHttpd -c htpasswd -nbB "" "super secret password" | cut -d: -f2
     loginAccounts = {
         "zero@leftychan.net" = {
-            hashedPassword = "$6$tpMnAm2wM$jOtRv91BXmdfjcotiIF6F/v931HsuC2qablEY/1GaKeT4EJBKiTKsBKm4FL4KFYVbhvvz5J6FB44Q.BqiQ6iR1";
+            hashedPassword = config.users.extraUsers.zero.hashedPassword;
             aliases = ["0@leftychan.net"];
         };
         "comatoast@leftychan.net" = {
-            hashedPassword = "$y$j9T$KcALsdRrqweFMDDn0XUV0/$njYkLv3WJtcCFFlLym9DkpRNs1ajHxHQZTg/62ZWN4/";
+            hashedPassword = config.users.extraUsers.comatoast.hashedPassword;
         };
         #pine
         "rockstar@leftychan.net" = {
-            hashedPassword = "$2y$05$UpONRXLVqXdgT47HeUcaaee1fyNd/4Zo/ogezmhNLVudgqkMGbd3.";
+            hashedPassword = config.users.extraUsers.rockstar.hashedPassword;
         };
         #gitea
         "git@leftychan.net" = {
-            hashedPassword = "$2y$05$tPqgBWGg6GzcSzFSFxCLM.GwruYrOT3G6UzAzhR6OF/P0/7XdWXMG";
+            hashedPassword = config.users.extraUsers.git.hashedPassword;
         };
     };
 
@@ -60,7 +60,7 @@ in
     comatoast = {
       isSystemUser = true;
       description = "comatoast's account - for email only";
-      hashedPassword = "$2y$05$Hfa0MTgivLek/iEWaUlReunpkY3g6As87Oqo516aJZuUCGzbAnZty";
+      hashedPassword = "$y$j9T$KcALsdRrqweFMDDn0XUV0/$njYkLv3WJtcCFFlLym9DkpRNs1ajHxHQZTg/62ZWN4/";
       group = "email_only";
     };
 
