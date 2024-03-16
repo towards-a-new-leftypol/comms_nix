@@ -34,6 +34,8 @@ in
 
 	MotdFile = ${motd}
 
+    Ports = 6667
+
     [SSL]
 	CertFile = ${tls_certificate}
 	KeyFile = ${tls_private_key}
