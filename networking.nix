@@ -20,6 +20,11 @@
     3479 # alt tcp port
     5349 # tls tcp port
     5350 # alt tls tcp port
+
+    #irc
+    6697 #irc ssl/tls
+    9999 #irc ssl/tls
+    6667 # irc
   ];
 
   networking.firewall.allowedUDPPorts = [

@@ -18,6 +18,7 @@
       ./mumble.nix
       ./netdata.nix
       ./postgresql.nix
+      ./irc.nix
     ];
 
   # Use the GRUB 2 boot loader.

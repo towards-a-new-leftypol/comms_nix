@@ -40,6 +40,7 @@ in
         "talk.leftychan.net"
         "matrix.leftychan.net"
         "git.leftychan.net"
+        "irc.leftychan.net"
       ];
 
       postRun = "systemctl reload nginx"
