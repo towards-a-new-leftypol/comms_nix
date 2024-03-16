@@ -25,6 +25,9 @@
     6697 #irc ssl/tls
     9999 #irc ssl/tls
     6667 # irc
+
+    #appservice irc
+    8009
   ];
 
   networking.firewall.allowedUDPPorts = [

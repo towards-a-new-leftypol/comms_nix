@@ -1,11 +1,12 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   subdomain = "netdata-l.leftychan.net";
   acme_dir = "/var/lib/acme/${subdomain}";
   tls_certificate = "${acme_dir}/fullchain.pem";
   tls_private_key = "${acme_dir}/key.pem";
-  irc_admin_passwd = builtins.readFile ./secrets/irc_admin_passwd;
+  irc_admin_passwd = lib.fileContents ./secrets/irc_admin_passwd;
+  db_passwd = lib.fileContents ./secrets/matrix-appservice-irc-database-password;
 
   motd_literal = ''
  ___           ___ __              __                               __   
@@ -23,6 +24,8 @@ let
 in
 
 {
+  imports = [ ./appservice-irc.nix ];
+
   services.ngircd.enable = true;
   services.ngircd.config = ''
     [Global]
@@ -51,4 +54,61 @@ in
 
   users.extraUsers.ngircd.extraGroups = [ "nginx" ];
   users.extraUsers.ngircd.isSystemUser = true;
+
+  services.my-matrix-appservice-irc = {
+    enable = true;
+    port = 8009;
+    registrationUrl = "http://matrix.leftychan.net:8009";
+    settings = {
+      database = {
+        connectionString = "postgresql://ircbridge:${db_passwd}@localhost:5432/ircbridge";
+        engine = "postgres";
+      };
+      homeserver = {
+        domain = "matrix.leftychan.net";
+        url = config.services.matrix-synapse.settings.public_baseurl;
+      };
+      ircService = {
+        servers = {
+          "irc.leftychan.net" = {
+            name = "Leftychan";
+            port = 6697;
+            ssl = true;
+            sasl = false;
+            membershipLists = {
+              enabled = true;
+              global = {
+                ircToMatrix = {
+                  initial = true;
+                  incremental = true;
+                };
+                matrixToIrc = {
+                  initial = true;
+                  incremental = true;
+                };
+              };
+              ignoreIdleUsersOnStartup = {
+                enabled = true;
+                idleForHours = 720;
+              };
+            };
+            mappings = {
+              "#leftychan" = {
+                roomIds = [ "!pzUwATCHBFSmplsmxu:matrix.org" ];
+              };
+            };
+            ircClients = {
+              allowNickChanges = true;
+              maxClients = 300;
+            };
+          };
+        };
+      };
+    };
+  };
+
+  users.groups.matrix-appservice-irc = {};
+  users.users.matrix-appservice-irc.group = "matrix-appservice-irc";
+  users.users.matrix-appservice-irc.extraGroups = [ "matrix-synapse" ];
+  users.users.matrix-appservice-irc.isSystemUser = true;
 }

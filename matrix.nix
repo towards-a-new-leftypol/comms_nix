@@ -92,6 +92,9 @@ in
       max_image_pixels = "64M";
       dynamic_thumbnails = true;
       allow_guest_access = true;
+      app_service_config_files = [
+        "/var/lib/matrix-appservice-irc/registration.yml"
+      ];
     };
   };
 
