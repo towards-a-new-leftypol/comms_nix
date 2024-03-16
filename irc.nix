@@ -39,6 +39,10 @@ in
 
     Ports = 6667
 
+    [Limits]
+    MaxConnectionsIP = 100
+    MaxNickLength = 20
+
     [SSL]
 	CertFile = ${tls_certificate}
 	KeyFile = ${tls_private_key}
