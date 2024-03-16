@@ -19,6 +19,7 @@
       ./netdata.nix
       ./postgresql.nix
       ./irc.nix
+      ./i2p.nix
     ];
 
   # Use the GRUB 2 boot loader.
