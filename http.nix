@@ -41,11 +41,13 @@ in
         "matrix.leftychan.net"
         "git.leftychan.net"
         "irc.leftychan.net"
+        "appservice-irc.leftychan.net"
       ];
 
       postRun = "systemctl reload nginx"
         + lib.optionalString config.services.matrix-synapse.enable " matrix-synapse; "
-        + lib.optionalString config.services.coturn.enable " systemctl restart coturn";
+        + lib.optionalString config.services.coturn.enable " systemctl restart coturn;";
+        + lib.optionalString config.services.ngircd.enable " systemctl restart ngircd";
     };
   };
 
@@ -142,6 +144,22 @@ in
       extraConfig = ''
         add_header Onion-Location http://git.${onion}$request_uri;
       '';
+
+      listen = [
+        { addr = "0.0.0.0"; port = 443; ssl = true; }
+        { addr = "0.0.0.0"; port = 80; ssl = false; }
+      ];
+    };
+
+    virtualHosts."appservice-irc.leftychan.net" = {
+      useACMEHost = subdomain;
+      forceSSL = true;
+
+      locations = {
+        "/" = {
+          proxyPass = "http://127.0.0.1:8009";
+        };
+      };
 
       listen = [
         { addr = "0.0.0.0"; port = 443; ssl = true; }

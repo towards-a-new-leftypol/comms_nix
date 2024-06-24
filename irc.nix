@@ -40,8 +40,8 @@ in
     Ports = 6667
 
     [Limits]
-    MaxConnectionsIP = 100
-    MaxNickLength = 20
+    MaxConnectionsIP = 200
+    MaxNickLength = 30
 
     [SSL]
 	CertFile = ${tls_certificate}
@@ -62,7 +62,7 @@ in
   services.my-matrix-appservice-irc = {
     enable = true;
     port = 8009;
-    registrationUrl = "http://matrix.leftychan.net:8009";
+    registrationUrl = "https://appservice-irc.leftychan.net";
     settings = {
       database = {
         connectionString = "postgresql://ircbridge:${db_passwd}@localhost:5432/ircbridge";
@@ -107,6 +107,10 @@ in
             };
           };
         };
+      };
+      provisioning = {
+        enabled = true;
+        widget = true;
       };
     };
   };
