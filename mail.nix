@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 
 let
-  release = "nixos-23.05";
+  release = "nixos-24.05";
 
 in
 
@@ -14,7 +14,7 @@ in
     ( builtins.fetchTarball {
       url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${release}/nixos-mailserver-${release}.tar.gz";
       # This hash needs to be updated
-      sha256 = "1ngil2shzkf61qxiqw11awyl81cr7ks2kv3r3k243zz7v2xakm5c";
+      sha256 = "0clvw4622mqzk1aqw1qn6shl9pai097q62mq1ibzscnjayhp278b";
     })
   ];
 
