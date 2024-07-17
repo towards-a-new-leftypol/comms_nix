@@ -17,11 +17,44 @@ let
     "m.homeserver".base_url = "https://matrix.leftychan.net";
     "m.identity_server" = {};
   };
+
   serverConfig."m.server" = "matrix.leftychan.net";
   mkWellKnown = data: ''
     add_header Content-Type application/json;
     add_header Access-Control-Allow-Origin *;
     return 200 '${builtins.toJSON data}';
+  '';
+
+  # Since we are proxied by cloudflare, read the real ip from the header
+  cloudflareExtraConfig = ''
+    # Cloudflare IPv4 addresses
+    set_real_ip_from 173.245.48.0/20;
+    set_real_ip_from 103.21.244.0/22;
+    set_real_ip_from 103.22.200.0/22;
+    set_real_ip_from 103.31.4.0/22;
+    set_real_ip_from 141.101.64.0/18;
+    set_real_ip_from 108.162.192.0/18;
+    set_real_ip_from 190.93.240.0/20;
+    set_real_ip_from 188.114.96.0/20;
+    set_real_ip_from 197.234.240.0/22;
+    set_real_ip_from 198.41.128.0/17;
+    set_real_ip_from 162.158.0.0/15;
+    set_real_ip_from 104.16.0.0/13;
+    set_real_ip_from 104.24.0.0/14;
+    set_real_ip_from 172.64.0.0/13;
+    set_real_ip_from 131.0.72.0/22;
+
+
+    # Cloudflare IPv6 addresses
+    set_real_ip_from 2400:cb00::/32;
+    set_real_ip_from 2606:4700::/32;
+    set_real_ip_from 2803:f800::/32;
+    set_real_ip_from 2405:b500::/32;
+    set_real_ip_from 2405:8100::/32;
+    set_real_ip_from 2a06:98c0::/29;
+    set_real_ip_from 2c0f:f248::/32;
+
+    real_ip_header CF-Connecting-IP;
   '';
 in
 
@@ -46,7 +79,7 @@ in
 
       postRun = "systemctl reload nginx"
         + lib.optionalString config.services.matrix-synapse.enable " matrix-synapse; "
-        + lib.optionalString config.services.coturn.enable " systemctl restart coturn;";
+        + lib.optionalString config.services.coturn.enable " systemctl restart coturn;"
         + lib.optionalString config.services.ngircd.enable " systemctl restart ngircd";
     };
   };
@@ -97,8 +130,10 @@ in
         return 404;
       '';
 
-      locations."/_matrix".proxyPass = "http://[::1]:8030"; 
-      locations."/_synapse/client".proxyPass = "http://[::1]:8030"; 
+      locations."/_matrix".proxyPass = "http://[::1]:8030";
+      locations."/_synapse/client".proxyPass = "http://[::1]:8030";
+
+      extraConfig = cloudflareExtraConfig;
 
       listen = [
         { addr = "0.0.0.0"; port = 8448; ssl = true; }
@@ -121,7 +156,7 @@ in
         };
       };
 
-      extraConfig = ''
+      extraConfig = cloudflareExtraConfig + ''
           client_max_body_size 10000M; 
       '';
 
@@ -141,7 +176,7 @@ in
         };
       };
 
-      extraConfig = ''
+      extraConfig = cloudflareExtraConfig + ''
         add_header Onion-Location http://git.${onion}$request_uri;
       '';
 
@@ -160,6 +195,8 @@ in
           proxyPass = "http://127.0.0.1:8009";
         };
       };
+
+      extraConfig = cloudflareExtraConfig;
 
       listen = [
         { addr = "0.0.0.0"; port = 443; ssl = true; }

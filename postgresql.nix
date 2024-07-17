@@ -18,7 +18,8 @@
         };
     };
 
-    services.postgresqlBackup.enable = true;
+    services.postgresqlBackup.enable = false;
+    services.postgresqlBackup.compression = "none";
     users.extraUsers.postgres = {
       isSystemUser = true;
 

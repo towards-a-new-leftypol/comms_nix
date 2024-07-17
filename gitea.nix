@@ -2,7 +2,7 @@
 
 {
   services.gitea = {
-    enable = true;
+    enable = false;
     settings = {
       mailer = {
         ENABLED = true;
@@ -25,6 +25,8 @@
       file = "gitea-dump";
     };
   };
+
+  users.groups.gitea = {};
 
   users.users.gitea-backup = lib.mkIf config.services.gitea.dump.enable {
     isNormalUser = true;
