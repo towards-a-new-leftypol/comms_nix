@@ -103,6 +103,15 @@ in
               "#leftychan" = {
                 roomIds = [ "!pzUwATCHBFSmplsmxu:matrix.org" ];
               };
+              "#congress" = {
+                roomIds = [ "!HhfAoPuCgilqyWFFqc:matrix.org" ];
+              };
+              "#voting" = {
+                roomIds = [ "!SkVIiLowHiTiNeNQXT:matrix.org" ];
+              };
+              "#dev" = {
+                roomIds = [ "!GiiormIykXmNzJSKix:matrix.org" ];
+              };
             };
             ircClients = {
               allowNickChanges = true;
