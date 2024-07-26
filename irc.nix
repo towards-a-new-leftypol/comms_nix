@@ -54,6 +54,9 @@ in
 
     [Options]
     PAM = no
+    CloakHost = hidden.host
+    CloakHostModeX = hidden.user
+    CloakUserToNick = yes
     '';
 
   users.extraUsers.ngircd.extraGroups = [ "nginx" ];
