@@ -11,7 +11,7 @@
       ./users.nix
       ./networking.nix
       ./packages.nix
-      ./gitea.nix
+      #./gitea.nix
       ./http.nix
       ./mail.nix
       ./matrix.nix
@@ -31,7 +31,7 @@
   boot.loader.grub.device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0"; # or "nodev" for efi only
   boot.loader.grub.configurationLimit = 30;
 
-  networking.hostName = "PUSHKA2"; # Define your hostname.
+  networking.hostName = "PUSHKA3"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.

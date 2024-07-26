@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  subdomain = "netdata-l.leftychan.net";
+  subdomain = "netdata-l2.leftychan.net";
   acme_dir = "/var/lib/acme/${subdomain}";
   tls_certificate = "${acme_dir}/fullchain.pem";
   tls_private_key = "${acme_dir}/key.pem";

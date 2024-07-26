@@ -21,7 +21,7 @@
 
   security.acme.certs."mumble.leftychan.net" = {
     group = "nginx";
-    postRun = "systemctl reload murmur.service";
+    postRun = "systemctl restart murmur.service";
   };
 
   users.groups.nginx.members = [ "murmur" ];

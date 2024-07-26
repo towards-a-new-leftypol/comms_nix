@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  subdomain = "netdata-l.leftychan.net";
+  subdomain = "netdata-l2.leftychan.net";
 
   onion = "leftychans5gstl4zee2ecopkv6qvzsrbikwxnejpylwcho2yvh4owad.onion";
 
@@ -72,7 +72,7 @@ in
       extraDomainNames = [
         "talk.leftychan.net"
         "matrix.leftychan.net"
-        "git.leftychan.net"
+        #"git.leftychan.net"
         "irc.leftychan.net"
         "appservice-irc.leftychan.net"
       ];
@@ -118,7 +118,7 @@ in
     };
 
     virtualHosts."matrix.leftychan.net" = {
-      enableACME = true;
+      useACMEHost = subdomain;
       forceSSL = true;
 
       locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
@@ -142,7 +142,7 @@ in
     };
 
     virtualHosts."talk.leftychan.net" = {
-      enableACME = true;
+      useACMEHost = subdomain;
       forceSSL = true;
 
       root = "${pkgs.element-web}";
@@ -166,6 +166,7 @@ in
       ];
     };
 
+/*
     virtualHosts."git.leftychan.net" = {
       enableACME = true;
       forceSSL = true;
@@ -185,6 +186,7 @@ in
         { addr = "0.0.0.0"; port = 80; ssl = false; }
       ];
     };
+*/
 
     virtualHosts."appservice-irc.leftychan.net" = {
       useACMEHost = subdomain;

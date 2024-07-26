@@ -10,7 +10,7 @@
     443
 
     #matrix-synapse
-    #8448 #tls port for federation
+    8448 #tls port for federation
 
     #murmur (mumble server)
     64738
