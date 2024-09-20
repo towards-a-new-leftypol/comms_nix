@@ -90,6 +90,7 @@ in
     recommendedProxySettings = true;
     recommendedOptimisation = true;
     recommendedGzipSettings = true;
+    clientMaxBodySize = "1024m";
 
     virtualHosts."${subdomain}" = {
       enableACME = true;

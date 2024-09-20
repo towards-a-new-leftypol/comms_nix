@@ -95,7 +95,7 @@ in
       app_service_config_files = [
         "/var/lib/matrix-appservice-irc/registration.yml"
       ];
-      presence.enabled = false;
+      #presence.enabled = false;
     };
   };
 
