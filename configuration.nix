@@ -11,7 +11,7 @@
       ./users.nix
       ./networking.nix
       ./packages.nix
-      #./gitea.nix
+      ./gitea.nix
       ./http.nix
       ./mail.nix
       ./matrix.nix

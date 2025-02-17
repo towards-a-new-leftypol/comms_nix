@@ -2,7 +2,7 @@
 
 {
   services.gitea = {
-    enable = false;
+    enable = true;
     settings = {
       mailer = {
         ENABLED = true;
@@ -16,6 +16,9 @@
       server = {
         DOMAIN = "git.leftychan.net";
         ROOT_URL = "https://git.leftychan.net/";
+      };
+      service = {
+        DISABLE_REGISTRATION = true;
       };
     };
     dump = {

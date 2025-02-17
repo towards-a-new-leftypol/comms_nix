@@ -64,7 +64,11 @@ in
   ];
 
   security.acme = {
-    defaults.email = "paul_cockshott@protonmail.com";
+    defaults = {
+        email = "paul_cockshott@protonmail.com";
+        # use staging server to debug
+        #server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+    };
     acceptTerms = true;
     certs."${subdomain}" = {
       group = "nginx";
@@ -72,7 +76,7 @@ in
       extraDomainNames = [
         "talk.leftychan.net"
         "matrix.leftychan.net"
-        #"git.leftychan.net"
+        "git.leftychan.net"
         "irc.leftychan.net"
         "appservice-irc.leftychan.net"
       ];
@@ -167,9 +171,8 @@ in
       ];
     };
 
-/*
     virtualHosts."git.leftychan.net" = {
-      enableACME = true;
+      useACMEHost = subdomain;
       forceSSL = true;
 
       locations = {
@@ -187,7 +190,6 @@ in
         { addr = "0.0.0.0"; port = 80; ssl = false; }
       ];
     };
-*/
 
     virtualHosts."appservice-irc.leftychan.net" = {
       useACMEHost = subdomain;
