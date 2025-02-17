@@ -79,6 +79,7 @@ in
         "git.leftychan.net"
         "irc.leftychan.net"
         "appservice-irc.leftychan.net"
+        "matrix-irc-mediaproxy.leftychan.net"
       ];
 
       postRun = "systemctl reload nginx"
@@ -138,8 +139,6 @@ in
       locations."/_matrix".proxyPass = "http://[::1]:8030";
       locations."/_synapse/client".proxyPass = "http://[::1]:8030";
 
-      extraConfig = cloudflareExtraConfig;
-
       listen = [
         { addr = "0.0.0.0"; port = 8448; ssl = true; }
         { addr = "0.0.0.0"; port = 443; ssl = true; }
@@ -198,6 +197,24 @@ in
       locations = {
         "/" = {
           proxyPass = "http://127.0.0.1:8009";
+        };
+      };
+
+      extraConfig = cloudflareExtraConfig;
+
+      listen = [
+        { addr = "0.0.0.0"; port = 443; ssl = true; }
+        { addr = "0.0.0.0"; port = 80; ssl = false; }
+      ];
+    };
+
+    virtualHosts."matrix-irc-mediaproxy.leftychan.net" = {
+      useACMEHost = subdomain;
+      forceSSL = true;
+
+      locations = {
+        "/" = {
+          proxyPass = "http://127.0.0.1:8010";
         };
       };
 

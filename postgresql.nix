@@ -4,7 +4,7 @@
     services.postgresql = {
         enable = true;
         enableTCPIP = true;
-        package = pkgs.postgresql_12;
+        package = pkgs.postgresql_17;
         # The actual running pg_hba.conf file has stuff after this.
         # Is that why the service won't start? There are duplicated
         # options, at best one of them is ignored.

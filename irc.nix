@@ -67,59 +67,78 @@ in
     port = 8009;
     registrationUrl = "https://appservice-irc.leftychan.net";
     settings = {
+
       database = {
         connectionString = "postgresql://ircbridge:${db_passwd}@localhost:5432/ircbridge";
         engine = "postgres";
       };
+
       homeserver = {
         domain = "matrix.leftychan.net";
         url = config.services.matrix-synapse.settings.public_baseurl;
       };
+
       ircService = {
         servers = {
           "irc.leftychan.net" = {
-            name = "Leftychan";
-            port = 6697;
-            ssl = true;
-            sasl = false;
-            membershipLists = {
-              enabled = true;
-              global = {
-                ircToMatrix = {
-                  initial = true;
-                  incremental = true;
-                };
-                matrixToIrc = {
-                  initial = true;
-                  incremental = true;
-                };
-              };
-              ignoreIdleUsersOnStartup = {
-                enabled = true;
-                idleForHours = 720;
-              };
-            };
-            mappings = {
-              "#leftychan" = {
-                roomIds = [ "!pzUwATCHBFSmplsmxu:matrix.org" ];
-              };
-              "#congress" = {
-                roomIds = [ "!HhfAoPuCgilqyWFFqc:matrix.org" ];
-              };
-              "#voting" = {
-                roomIds = [ "!SkVIiLowHiTiNeNQXT:matrix.org" ];
-              };
-              "#dev" = {
-                roomIds = [ "!GiiormIykXmNzJSKix:matrix.org" ];
-              };
-            };
-            ircClients = {
-              allowNickChanges = true;
-              maxClients = 300;
-            };
+             name = "Leftychan";
+             port = 6697;
+             ssl = true;
+             sasl = false;
+
+             membershipLists = {
+               enabled = true;
+               global = {
+                   ircToMatrix = {
+                       initial = true;
+                       incremental = true;
+                   };
+                   matrixToIrc = {
+                       initial = true;
+                       incremental = true;
+                   };
+               };
+               ignoreIdleUsersOnStartup = {
+                   enabled = true;
+                   idleForHours = 720;
+               };
+             };
+
+             mappings = {
+               "#leftychan" = {
+                   roomIds = [ "!pzUwATCHBFSmplsmxu:matrix.org" ];
+               };
+               "#congress" = {
+                   roomIds = [ "!HhfAoPuCgilqyWFFqc:matrix.org" ];
+               };
+               "#voting" = {
+                   roomIds = [ "!SkVIiLowHiTiNeNQXT:matrix.org" ];
+               };
+               "#dev" = {
+                   roomIds = [ "!GiiormIykXmNzJSKix:matrix.org" ];
+               };
+             };
+
+             ircClients = {
+               allowNickChanges = true;
+               maxClients = 300;
+             };
+
           };
         };
+
+        mediaProxy = {
+          # To generate a .jwk file:
+          # $ node src/generate-signing-key.js > signingkey.jwk
+          signingKeyPath = ./secrets/matrix-appservice-irc-mediaproxy_key.jwk;
+          # How long should the generated URLs be valid for
+          ttlSeconds = 3600;
+          bindPort = 8010;
+          publicUrl  = "https://matrix-irc-mediaproxy.leftychan.net/media";
+        };
+
       };
+
       provisioning = {
         enabled = true;
         widget = true;

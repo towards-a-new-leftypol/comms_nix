@@ -22,7 +22,7 @@
       };
     };
     dump = {
-      enable = true;
+      enable = false;
       backupDir = "/var/backup/gitea";
       type = "tar.gz";
       file = "gitea-dump";

@@ -20,7 +20,7 @@ in
 
   nixpkgs.config.packageOverrides = pkgs: {
     coturn = pkgs.coturn.overrideAttrs (oldAttrs: {
-      buildInputs = oldAttrs.buildInputs ++ [ pkgs.postgresql_12 ];
+      buildInputs = oldAttrs.buildInputs ++ [ pkgs.postgresql_17 ];
     });
   };
 
