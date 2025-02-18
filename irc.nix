@@ -96,10 +96,10 @@ in
                        incremental = true;
                    };
                };
-               ignoreIdleUsersOnStartup = {
-                   enabled = true;
-                   idleForHours = 720;
-               };
+               # ignoreIdleUsersOnStartup = {
+               #     enabled = true;
+               #     idleForHours = 720;
+               # };
              };
 
              mappings = {
