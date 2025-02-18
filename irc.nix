@@ -24,8 +24,6 @@ let
 in
 
 {
-  imports = [ ./appservice-irc.nix ];
-
   services.ngircd.enable = true;
   services.ngircd.config = ''
     [Global]
@@ -62,7 +60,7 @@ in
   users.extraUsers.ngircd.extraGroups = [ "nginx" ];
   users.extraUsers.ngircd.isSystemUser = true;
 
-  services.my-matrix-appservice-irc = {
+  services.matrix-appservice-irc = {
     enable = true;
     port = 8009;
     registrationUrl = "https://appservice-irc.leftychan.net";
@@ -132,9 +130,9 @@ in
           # $ node src/generate-signing-key.js > signingkey.jwk
           signingKeyPath = ./secrets/matrix-appservice-irc-mediaproxy_key.jwk;
           # How long should the generated URLs be valid for
-          ttlSeconds = 3600;
+          ttlSeconds = 2592000; # one month
           bindPort = 8010;
-          publicUrl  = "https://matrix-irc-mediaproxy.leftychan.net/media";
+          publicUrl  = "https://matrix-irc-mediaproxy.leftychan.net";
         };
 
       };
