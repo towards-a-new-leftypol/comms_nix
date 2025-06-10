@@ -66,7 +66,7 @@ in
       ];
 
       server_name = "matrix.leftychan.net";
-      enable_registration = true;
+      enable_registration = false;
       enable_registration_captcha = true;
       recaptcha_private_key = recaptcha_pk;
       recaptcha_public_key = "6Ldqya8cAAAAAGO8-WREEtz8FWmO-xNQp3H91X4R";

@@ -2,7 +2,7 @@
 
 {
   services.gitea = {
-    enable = true;
+    enable = false;
     settings = {
       mailer = {
         ENABLED = true;
