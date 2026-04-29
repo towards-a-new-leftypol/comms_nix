@@ -20,6 +20,8 @@ in
 
   mailserver = {
     enable = true;
+    openFirewall = true;
+    enableSubmission = true;
     fqdn = "mail.leftychan.net";
     domains = [ "leftychan.net" ];
     debug = {
