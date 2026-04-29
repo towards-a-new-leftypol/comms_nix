@@ -5,7 +5,7 @@
     wget
     neovim
     curl
-    gitAndTools.gitFull
+    gitFull
     ripgrep
     xz
     screen

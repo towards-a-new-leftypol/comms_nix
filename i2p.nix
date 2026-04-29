@@ -22,7 +22,7 @@ in
         keys = keyname;
         inPort = 6697;
         address = "127.0.0.1";
-        destination = "127.0.0.1";
+        # destination = "127.0.0.1";
         port = 9999;
         inbound.length = 1;
         outbound.length = 1;
@@ -35,7 +35,7 @@ in
         keys = keyname;
         inPort = 6667;
         address = "127.0.0.1";
-        destination = "127.0.0.1";
+        # destination = "127.0.0.1";
         port = 6667;
         inbound.length = 1;
         outbound.length = 1;

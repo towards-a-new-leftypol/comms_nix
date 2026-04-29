@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 
 let
-  release = "nixos-25.05";
+  release = "nixos-25.11";
 
 in
 
@@ -14,7 +14,7 @@ in
     ( builtins.fetchTarball {
       url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${release}/nixos-mailserver-${release}.tar.gz";
       # This hash needs to be updated
-      sha256 = "0jpp086m839dz6xh6kw5r8iq0cm4nd691zixzy6z11c4z2vf8v85";
+      sha256 = "sha256:0f1mq2gdmx9wd0k89f6w61sbfzpd1wwz857l2xvyp1x0msmd2z20";
     })
   ];
 
@@ -22,7 +22,10 @@ in
     enable = true;
     fqdn = "mail.leftychan.net";
     domains = [ "leftychan.net" ];
-    debug = true;
+    debug = {
+        "all" = true;
+    };
+    stateVersion = 3;
 
     # A list of all login accounts. To create the password hashes, use
     # nix run nixpkgs.apacheHttpd -c htpasswd -nbB "" "super secret password" | cut -d: -f2
