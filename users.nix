@@ -11,7 +11,7 @@
  |::.|   |::.. . |::.. . |::.|:. |::.| .  |::.|:. |::.. . |
  `---'   `-------`-------`--- ---`--- ---'`--- ---`-------'
 
-          (Production system, NixOS 25.05)
+          (Production system, NixOS 26.05)
   '';
 
   users.extraUsers.admin = {

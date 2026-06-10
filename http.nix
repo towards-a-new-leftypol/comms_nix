@@ -63,11 +63,13 @@ in
     element-web
   ];
 
+
   security.acme = {
     defaults = {
         email = "paul_cockshott@protonmail.com";
         # use staging server to debug
         #server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+        webroot = "/var/lib/acme/acme-challenge/";
     };
     acceptTerms = true;
     certs."${subdomain}" = {

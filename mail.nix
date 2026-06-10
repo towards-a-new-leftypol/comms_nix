@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 
 let
-  release = "nixos-25.11";
+  release = "nixos-26.05";
 
 in
 
@@ -14,7 +14,7 @@ in
     ( builtins.fetchTarball {
       url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${release}/nixos-mailserver-${release}.tar.gz";
       # This hash needs to be updated
-      sha256 = "sha256:0f1mq2gdmx9wd0k89f6w61sbfzpd1wwz857l2xvyp1x0msmd2z20";
+      sha256 = "sha256:18plp4nwvm4l9zbmn62r8i1c43yjrgrb01n1izfr7l9qwmci9n9n";
     })
   ];
 
@@ -49,9 +49,7 @@ in
         };
     };
 
-    # Use Let's Encrypt certificates. Note that this needs to set up a stripped
-    # down nginx and opens port 80.
-    certificateScheme = "acme-nginx";
+    x509.useACMEHost = config.mailserver.fqdn;
   };
 
 
